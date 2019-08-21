@@ -3,6 +3,8 @@ const engine = {
     canvas:null,
     ctx:null,
     map:null,
+    nickname:"Wigtor", //PHP AUTH NUMBER!!!
+    player:null,
     start:function(){
         canvas = document.querySelector('canvas');
         ctx = canvas.getContext('2d');
@@ -27,17 +29,27 @@ const engine = {
         socket:new WebSocket("ws://localhost:50505"),
         use:function(){        
             this.socket.onopen = event =>{
-                socket.send("DUPA");
+               this.socket.send(engine.nickname);
             }
             this.socket.onmessage = event =>{
-                console.log("MESSAGE:"+event.data);
+                try {
+                    var json = JSON.parse(event.data);
+                    player = json;
+                  } catch (e) {}
             }
             this.socket.onclose = event =>{
                 console.log("Connection closed");
             }
-            this.socket.onerror = event =>{
+            this.socket.onerror = event =>{//DELETE
                 console.error("Connection error:"+event);
             }
+            if(this.socket.readyState == 3){
+                createSocket();
+            }
+            function createSocket(){
+                engine.networking.socket = new WebSocket("ws://localhost:50505");
+            }
+
         }
     },
     render:{
