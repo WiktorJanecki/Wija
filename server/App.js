@@ -29,7 +29,8 @@ function newMessage(message,connection){
   const playerObject = JSON.stringify(clients["Wigtor"]);
   connection.sendUTF(playerObject);
 }
-function addClient(name){noc++;clients[name] = new player();}
+function addClient(name){noc++;clients[name] = new player();
+}
 function player(){
   this.x = 4;
   this.y = 5;
