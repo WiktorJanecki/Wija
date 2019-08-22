@@ -22,6 +22,7 @@ if(isset($_POST['login'])){
         if($user['pass']==$passwordAttempt){
 
             $_SESSION['id'] = $user['id'];
+            $_SESSION['login'] = $user['login'];
             $_SESSION['characters'] = $user['characters'];
             
             $_SESSION['state'] = "logged";

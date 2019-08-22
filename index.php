@@ -12,12 +12,21 @@ session_start();
     </head>
     <body>
         <?php
-        if(!isset($_SESSION['state']) ||$_SESSION['state'] != "logged"){
+        if(!isset($_SESSION['state']) || $_SESSION['state'] != "logged"){
             require 'php/modules/loginForm.php';
-        }
-        else if(isset($_SESSION['state']) && $_SESSION['state'] == "logged"){
-            require_once 'php/modules/characters.php';
-        }
+        }else{
+            echo "Welcome ".$_SESSION['login']."!"; echo '<a href="/php/logout.php">[LOGOUT]</a>';
+            if(!isset($_GET['v'])){$path = "php/modules/characters.php";}
+            else{
+            $path = "php/modules/".$_GET['v'].".php";}
+            
+            if(file_exists($path)){
+                require $path;
+            }else{
+                header("Location: /404.html");
+                exit();
+            }
+        }   
         ?>
     </body>
 </html>
