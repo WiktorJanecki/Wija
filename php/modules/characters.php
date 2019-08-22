@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_SESSION['state'] != "logged"){
     header("Location:  /");
 }
@@ -26,7 +25,6 @@ if($_SESSION['state'] != "logged"){
                 }
             ?>
             <script>
-                console.log(characters) //DOSTEJE JSONA 
                 const charactersCount = Object.keys(characters).length; 
                 const form = document.getElementById("form");
                 for(let i = 0;i<charactersCount;i++){
@@ -35,7 +33,6 @@ if($_SESSION['state'] != "logged"){
                     radio.name = "characters";
                     const div = document.createElement('span');
                     const c = Object.keys(characters)[i];
-                    console.log(c);
                     div.textContent = characters[c].nickname;
                     form.appendChild(radio);
                     form.appendChild(div);
@@ -45,6 +42,6 @@ if($_SESSION['state'] != "logged"){
             </script>
             <button type="submit" formaction="/game.php">Graj</button>
         </form> 
-        <a href="php/logout.php">WYLOGUJ</a>
+        <a href="/php/logout.php">WYLOGUJ</a>
     </body>
 </html>

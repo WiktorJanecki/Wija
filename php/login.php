@@ -26,7 +26,7 @@ if(isset($_POST['login'])){
             
             $_SESSION['state'] = "logged";
 
-            header("Location: /characters.php");
+            header("Location: /");
         }else{
             $_SESSION['loginError'] = "Złe hasło";
             header("Location: /");

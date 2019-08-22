@@ -1,9 +1,5 @@
 <?php
 session_start();
-if(isset($_SESSION['state']) && $_SESSION['state'] == "logged"){
-    header("Location:  /characters.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,18 +11,13 @@ if(isset($_SESSION['state']) && $_SESSION['state'] == "logged"){
         <!-- <link rel="stylesheet" href="css/normalize.css"> -->
     </head>
     <body>
-        <h1>Login</h1>
-        <form action="php/login.php" method="post">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password"><br>
-            <input type="submit" name="login" value="Login">
-        </form>
-        <span style="color:red">
         <?php
-        if(isset($_SESSION['loginError'])){echo $_SESSION['loginError'];}
+        if(!isset($_SESSION['state']) ||$_SESSION['state'] != "logged"){
+            require 'php/modules/loginForm.php';
+        }
+        else if(isset($_SESSION['state']) && $_SESSION['state'] == "logged"){
+            require_once 'php/modules/characters.php';
+        }
         ?>
-        </span>
     </body>
 </html>
