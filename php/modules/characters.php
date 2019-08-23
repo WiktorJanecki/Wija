@@ -15,19 +15,24 @@ if($_SESSION['state'] != "logged"){
     </head>
     
     <body>
-        <form id="charactersForm"> 
-            <script>let characters;</script>
-            <?php
-                require 'php/refreshCharacters.php';
+        <article>
+                <div>
+                    <form id="charactersForm"> 
+                    <script>let characters;</script>
+                    <?php
+                        require 'php/refreshCharacters.php';
 
-                if($_SESSION['characters'] != "0"){
-                    echo '<script>characters =  '.$_SESSION["characters"].'</script>';
-                    
-                }else{
-                    echo"NO CHARACTERS<br>";
-                }
-            ?>
-            <script src="/js/phpModules/characterList.js"></script>
+                        if($_SESSION['characters'] != "0"){
+                            echo '<script>characters =  '.$_SESSION["characters"].'</script>';
+                            
+                        }else{
+                            echo"NO CHARACTERS<br>";
+                        }
+                    ?>
+                    <script src="/js/phpModules/characterList.js"></script>
+                    <span style="color:red"><?php if(isset($_SESSION['characterError'])){echo $_SESSION['characterError'];unset($_SESSION['characterError']);}?></span>
+                </div>
+            </article>
         </form> 
     </body>
 </html>

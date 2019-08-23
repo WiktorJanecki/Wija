@@ -37,6 +37,7 @@ if($json->success == true && $json->score > 0.5){
                         $stmt->bindValue(":login",$_POST['username']);
                         $stmt->bindValue(":pass",$hash);
                         $stmt->execute();
+                        header('Location: /');
                         
                     }
                 }else{

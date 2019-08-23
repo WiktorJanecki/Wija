@@ -17,7 +17,7 @@ if(isset($_POST['chooseCharacter'])){
             echo "<br>".$keys[$i].":   ".$var;
             $i++;
         }
-        echo'<br><a href="/">WRÓC</a>';
+        echo'<br><br><a class="btn btn-secondary col-12" href="/">Wstecz</a>';
 
 
 
@@ -26,6 +26,7 @@ if(isset($_POST['chooseCharacter'])){
         header("Location: /");
     }
 }else{
+    $_SESSION['characterError'] = 'Wybierz postać którą chcesz zobaczyć';
     Header("Location: /");
 }
 ?>
