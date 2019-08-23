@@ -16,6 +16,6 @@ if($_SESSION['state'] != "logged"){
 </head>
 <body>
     <canvas></canvas>
-<script src="js/App.js"></script>  
+<script src="js/game/App.js"></script>  
 </body>
 </html>

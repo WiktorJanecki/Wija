@@ -8,12 +8,15 @@
 </ul>
 <form action="/php/createChar.php" method="post">
     <input type="text" name="nickname" id=""><br>
-    <input type="radio" name="class" value="class1" id="">
-    <input type="radio" name="class" value="class2" id="">
-    <input type="radio" name="class" value="class3" id="">
-    <input type="radio" name="class" value="class4" id="">
-    <input type="radio" name="class" value="class5" id="">
-    <input type="radio" name="class" value="class6" id="">
+    <input type="radio" name="class" value="1" id="">
+    <input type="radio" name="class" value="2" id="">
+    <input type="radio" name="class" value="3" id="">
+    <input type="radio" name="class" value="4" id="">
+    <input type="radio" name="class" value="5" id="">
+    <input type="radio" name="class" value="6" id="">
+    <br>
+    <input type="radio" name="sex" value="male" id="">
+    <input type="radio" name="sex" value="famale" id="">
     <br>
     <button type="submit" name="create">CREATE</button>
     <p style="color:red">
@@ -24,4 +27,5 @@
         unset($_SESSION['createError']);
     }
     ?></p>
+    <a href="/">WSTECZ</a>
 </form>

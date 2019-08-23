@@ -5,6 +5,7 @@
     <label for="password">Password</label>
     <input type="password" id="password" name="password"><br>
     <input type="submit" name="login" value="Login">
+    <input type="button" onclick='window.location.href="/index.php?v=register"' value="Zarejestruj">
 </form>
 <span style="color:red"><?php
     if(isset($_SESSION['loginError']))
