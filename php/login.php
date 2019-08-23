@@ -19,8 +19,8 @@ if(isset($_POST['login'])){
         header("Location: /");
         exit;
     }else{
-        if($user['pass']==$passwordAttempt){
-
+        if(password_verify($passwordAttempt,$user['pass'])==1){
+            
             $_SESSION['id'] = $user['id'];
             $_SESSION['login'] = $user['login'];
             $_SESSION['characters'] = $user['characters'];
