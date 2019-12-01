@@ -1,7 +1,10 @@
 import getToken from './getToken';
-import engine from './game';
-import link from './config/links'
+import link from './config/links';
+import Game from './core/game';
+import './styles.css'
+
 getToken();
+
 fetch(link.websiteServer+"/auth",{
     method: 'get',    
     headers: {
@@ -17,7 +20,13 @@ fetch(link.websiteServer+"/auth",{
         window.location.href = link.websiteClient+"/login";
     }
 })
-.then((data)=> {engine.start();
-function loop(){engine.loop();requestAnimationFrame(loop);}
-requestAnimationFrame(loop);});
+.then((data) => {
+    const game = new Game();
+    game.start();
+    function loop(){
+        game.update();
+        requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+});
 

@@ -33,6 +33,10 @@ module.exports = {
         test: /\.js$/,
         type: 'javascript/esm',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },

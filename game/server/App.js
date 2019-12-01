@@ -6,32 +6,30 @@ server.listen(50505, function() { });
 wsServer = new WebSocketServer({
   httpServer: server
 });
-let clients = {};
-let noc = 0;
-addClient(123)
+let clients = {
+    "1":"21",
+    "3":"21",
+    "4":"21",
+};
 // WebSocket server
 wsServer.on('request', function(request) {
-  var connection = request.accept(null, request.origin);
-  connection.on('message', function(message) {
-    if(clients[message.utf8Data] !== undefined){
-      newMessage(message.utf8Data,connection);
+var connection = request.accept(null, request.origin);
+    connection.on('message', function(message) {
+    if(message.type="utf8"){
+        //Sprawdz czy ma dostęp do postaci
+        const data = message.utf8Data;
+        if (clients.hasOwnProperty(data.id)) {
+            //Super
+        }
+        else{
+            //Dodaj go z mysqla
+            clients[data.id] = {
+                'x':0,
+                'y':0,
+                'map':"",
+            }
+        }
     }
-    else if(clients[message.utf8Data] === undefined){
-      addClient(message.utf8Data);
-      console.log(clients);
-    }
-
-  });
-  connection.on('close', function(connection) {});
+    });
+    connection.on('close', function(connection) {});
 });
-
-function newMessage(message,connection){
-  const playerObject = JSON.stringify(clients["Wigtor"]);
-  connection.sendUTF(playerObject);
-}
-function addClient(name){noc++;clients[name] = new player();
-}
-function player(){
-  this.x = 4;
-  this.y = 5;
-}
