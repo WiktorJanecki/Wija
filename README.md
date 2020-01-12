@@ -10,19 +10,19 @@ Coming Soon
 
 ## Launch
 
-It need's **4** node consoles
-1 
-`cd web/client`
-`npm run start`
-2
-`cd web/server`
-`node app.js`
-3
-`cd game/client`
-`npm run dev`
-4
-`cd game/server`
-`node App.js`
+It need's **4** node consoles  
+1   
+`cd web/client`  
+`npm run start`  
+2  
+`cd web/server`  
+`node app.js`  
+3  
+`cd game/client`  
+`npm run dev`  
+4  
+`cd game/server`  
+`node App.js`  
 
 
 ## Features
@@ -35,10 +35,10 @@ It need's **4** node consoles
 
 ## TO-DO
 
-[ ] client auth with code (witout database connection)
-[ ] client spawns in his x and y
-[ ] update example tiles images to tiles from world editor
-[ ] "steps counter" in client side
+[ ] client auth with code (witout database connection)    
+[ ] client spawns in his x and y  
+[ ] update example tiles images to tiles from world editor  
+[ ] "steps counter" in client side  
 
 
 ## Author
