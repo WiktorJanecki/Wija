@@ -1,10 +1,10 @@
 class connectionManager{
-    constructor(){
+    constructor(messageCallback){
         this.ws = new WebSocket('ws://localhost:50505');
         this.ws.onopen = function(e,) {};
         
         this.ws.onmessage = function(event) {
-            console.log(event.data);
+            messageCallback(event.data);
         };
         
         this.ws.onclose = function(event) {
@@ -21,7 +21,13 @@ class connectionManager{
         }
     }
     send(data){
-        this.ws.send(data);
+        if(this.ws.readyState == 1){
+            this.ws.send(data);
+        }else{
+            const that = this;
+            setTimeout(()=>{that.send(data)},500)
+
+        }
     }
 }
 export default connectionManager;
