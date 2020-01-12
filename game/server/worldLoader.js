@@ -35,6 +35,7 @@ module.exports.load = function load(map){
             firstL = true;
             jindex = 0;
             for(let i = 0;i<lines.length-1;i++){
+                let string = "";
                 jindex = 0;
                 if(firstL){
                     firstL = false;
@@ -42,8 +43,11 @@ module.exports.load = function load(map){
                 else{
                     for(let j = 0;j<lines[1].length;j++){
                         if (lines[i][j] != ';'){
-                            tiles[i-1][jindex] = lines[i][j]
+                            string = string+lines[i][j];
+                        }else{
+                            tiles[i-1][jindex] = string;
                             jindex++;
+                            string = "";
                         }
                     }
                 }
