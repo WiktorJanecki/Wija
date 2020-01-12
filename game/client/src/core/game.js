@@ -29,7 +29,7 @@ class game{
     }
     update(){
         camera.prepare(this.ctx); 
-        if(this.ready){this.worldRenderer.render(this.ctx);}
+        if(this.ready){this.worldRenderer.render(this.ctx,camera.getCameraX(),camera.getCameraY());}
         camera.update(player.getX(),player.getY(),this.ctx);
         player.render(this.ctx);
         

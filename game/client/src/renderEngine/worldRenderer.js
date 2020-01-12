@@ -16,10 +16,15 @@ class worldRenderer{
             }
          }
     }
-    render(ctx){
+    render(ctx,camX,camY){
          for(let i = 0;i <this.world.length;i++){
             for(let j = 0;j <this.world[0].length;j++){
-                this.tiles[i][j].render(ctx);
+                if(this.tiles[i][j].getX()*64 > camX - 64 && this.tiles[i][j].getX()*64 < window.innerWidth + camX){
+                    if(this.tiles[i][j].getY()*64 > camY - 64 && this.tiles[i][j].getY()*64 < window.innerHeight + camY){
+                        this.tiles[i][j].render(ctx);
+                    }
+                }
+
             }
          }
     }

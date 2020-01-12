@@ -35,10 +35,10 @@ It need's **4** node consoles
 
 ## TO-DO
 
-[ ] client auth with code (witout database connection)    
-[ ] client spawns in his x and y  
-[ ] update example tiles images to tiles from world editor  
-[ ] "steps counter" in client side  
+* [ ] client auth with code (witout database connection)    
+* [ ] client spawns in his x and y  
+* [ ] update example tiles images to tiles from world editor  
+* [ ] "steps counter" in client side  
 
 
 ## Author
