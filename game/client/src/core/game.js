@@ -22,7 +22,10 @@ class game{
     }
     start(){
         window.addEventListener('resize',()=>{resize(this.canvas)});
-        cm.send(JSON.stringify({"success":"true"}))
+        cm.send(JSON.stringify({
+            "token":localStorage.getItem('token'),
+            "id":localStorage.getItem('character'),
+        }))
     }
     update(){
         camera.prepare(this.ctx);
