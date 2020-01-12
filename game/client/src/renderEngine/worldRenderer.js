@@ -24,7 +24,6 @@ class worldRenderer{
                         this.tiles[i][j].render(ctx);
                     }
                 }
-
             }
          }
     }

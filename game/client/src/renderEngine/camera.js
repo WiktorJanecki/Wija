@@ -49,5 +49,9 @@ class camera{
     getCameraY(){
         return this.cameraY;
     }
+    resetCamera(){
+        this.cameraX = 0
+        this.cameraY = 0
+    }
 }
 export default camera;

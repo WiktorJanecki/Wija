@@ -1,9 +1,9 @@
 class player{
-    constructor(){
+    constructor(x,y){
         this.image = new Image();
         this.image.src = "../../images/player.png";
-        this.x = 5;
-        this.y = 5;
+        this.x = x;
+        this.y = y;
         this.dx = this.x*64;
         this.dy = this.y*64;
         this.cooldown = 0.5;

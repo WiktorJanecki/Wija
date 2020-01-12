@@ -6,13 +6,13 @@ class blockId{
         const path = "../../images/"
         switch(id){
             case 0:
-                return path+"tile2.png";
+                return path+"air.png";
                 break;
             case 1:
-                return path+"tile.png";
+                return path+"grass.png";
                 break;
             case 2:
-                return path+"";
+                return path+"wall.png";
                 break;
         }
     }
