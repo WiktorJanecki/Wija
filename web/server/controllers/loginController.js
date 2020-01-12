@@ -43,7 +43,7 @@ module.exports.auth = (req,res) =>{
     jwt.verify(req.token,process.env.JWT_SECRET,(err,data)=>{
         if(err){res.sendStatus(403)}
         else{
-                sendJWT({error: '',success:true},res)
+            sendJWT({error: '',success:true},res)
         }
     })
 }
