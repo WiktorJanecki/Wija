@@ -18,6 +18,8 @@ class game{
         this.canvas = generatedCanvas.canvas;
         this.ctx = generatedCanvas.ctx;
         this.ready = false;
+        this.player = new Player(0,0);
+        this.sendTimer = setInterval(()=>{const func = this.sendPackage.bind(this);func()},1000)
 
     }
     start(){
@@ -37,9 +39,26 @@ class game{
     }
     onMessage(e){
         this.response = JSON.parse(e);
+        if(!this.ready){
+            this.worldRenderer= new WorldRenderer(this.response.map)
+            this.player.teleport(this.response.x,this.response.y)
+            //camera.move(-30,200); here
+        }
         this.ready = true;
-        this.worldRenderer= new WorldRenderer(this.response.map)
-        this.player = new Player(this.response.x,this.response.y);
+        if(this.player.x!= this.response.x || this.player.y!=this.response.y){
+            this.player.x = this.response.x;
+            this.player.y = this.response.y;
+        }
+        console.log(this.response)
+    }
+    sendPackage(){
+        this.cm.send(JSON.stringify({
+            "token":localStorage.getItem('token'),
+            "id":localStorage.getItem('character'),
+            "code":this.response.code,
+            "steps":this.player.getSteps(),
+        }))
+        this.player.resetSteps();
     }
 }
 export default game;

@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import './LoginForm.scss';
 import link from '../../config/link';
+import styled from 'styled-components'
+
 class LoginForm extends Component{
     constructor(props){
         super(props);
@@ -66,6 +68,7 @@ class LoginForm extends Component{
                     <button onClick={() => this.login()} type="button" className="submit">Zaloguj</button>
                     
                 </form>
+                <a class="returnn" href="/">Wróć</a>
                 <span className="error" style={{color: "red"}}>{error}</span>
             </div>
         );

@@ -11,16 +11,16 @@ Coming Soon
 ## Launch
 
 It need's **4** node consoles  
-1   
+### 1   
 `cd web/client`  
 `npm run start`  
-2  
+### 2  
 `cd web/server`  
 `node app.js`  
-3  
+### 3  
 `cd game/client`  
 `npm run dev`  
-4  
+### 4  
 `cd game/server`  
 `node App.js`  
 
@@ -35,8 +35,8 @@ It need's **4** node consoles
 
 ## TO-DO
 
-* [ ] client auth with code (witout database connection)    
-* [ ] "steps counter" in client side  
+* [ ] REFACTORING!!!! - game/server and less game/client
+* [ ] Get all clients in client map and render them
 
 
 ## Author

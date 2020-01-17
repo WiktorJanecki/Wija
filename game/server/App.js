@@ -12,9 +12,6 @@ wsServer = new WebSocketServer({
   httpServer: server
 });
 let clients = {
-    "1":"21",
-    "3":"21",
-    "4":"21",
 };
 let map = {
 
@@ -26,28 +23,31 @@ var connection = request.accept(null, request.origin);
         if(message.type="utf8"){
             const data = JSON.parse(message.utf8Data);
             const that = this;
-            auth(this, data).then((authed)=>{
-                if(authed[0]){   
-                    if (clients.hasOwnProperty(data.id)) { //jezeli jest juz na serwie
-                        console.log(clients)
-                        response.responseToClient(that,clients[data.id], map)
-                    }
-                    else{ //jezeli go nie ma na servie to dodaje go z bazy danych
-                        row = authed[1][0];
-                        clients[data.id] = {
-                            'x':row.x,
-                            'y':row.y,
-                            'map':row.map,
-                            'code':getRandomInt(0,10000)
-                            //dodaj wiecej daty z msqla
+            if(data.code>1){
+                response.responseToClient(this,clients[data.id], map, data)
+            }else{
+                auth(this, data).then((authed)=>{                
+                    if(authed[0]){   
+                        if (clients.hasOwnProperty(data.id)) { //jezeli jest juz na serwie
+                            response.responseToClient(that,clients[data.id], map, data)
                         }
-                        response.responseToClient(that,clients[data.id], map)
+                        else{ //jezeli go nie ma na servie to dodaje go z bazy danych
+                            row = authed[1][0];
+                            clients[data.id] = {
+                                'x':row.x,
+                                'y':row.y,
+                                'map':row.map,
+                                'code':getRandomInt(50,10000)
+                                //dodaj wiecej daty z msqla
+                            }
+                            response.responseToClient(that,clients[data.id], map, data)
+                        }
                     }
-                }
-                else{
-                    that.sendUTF(JSON.stringify({success:false,error:"Cant access to this character"}))
-                }
-            })
+                    else{
+                        that.sendUTF(JSON.stringify({success:false,error:"Cant access to this character"}))
+                    }
+                })  
+            }
         }
     });
     connection.on('close', function(connection) {});

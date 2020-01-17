@@ -53,5 +53,8 @@ class camera{
         this.cameraX = 0
         this.cameraY = 0
     }
+    teleport(ctx,x,y){
+        ctx.translate(x,y);
+    }
 }
 export default camera;

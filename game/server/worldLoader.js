@@ -3,6 +3,7 @@ var fs = require('fs')
 module.exports.load = function load(map){
     return new Promise((resolve,reject)=>{
         fs.readFile('./maps/'+ map +'.txt','utf8', (err, data)=>{
+            console.log(map)
             let x = "";
             let y = "";
             let index = 0;

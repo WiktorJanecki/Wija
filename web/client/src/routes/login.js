@@ -26,7 +26,6 @@ class login extends React.Component{
         return(
             <StyledContainer>
                 <LoginForm history={this.props.history} />
-                <StyledLink className="return" to="/">WRÓĆ</StyledLink>
             </StyledContainer>
         );
     }

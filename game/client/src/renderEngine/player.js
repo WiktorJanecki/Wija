@@ -4,6 +4,7 @@ class player{
         this.image.src = "../../images/player.png";
         this.x = x;
         this.y = y;
+        this.steps = [];
         this.dx = this.x*64;
         this.dy = this.y*64;
         this.cooldown = 0.5;
@@ -56,6 +57,24 @@ class player{
             this.x+=x;
             this.y+=y;
             this.cooldown = 0.5;
+            if(y == 0){
+                if(x>0){
+                    this.steps.push('r')
+                    
+                }else{
+                    this.steps.push('l')
+                    
+                }
+            }
+            else{
+                if(y>0){
+                    this.steps.push('d')
+                    
+                }else{
+                    this.steps.push('u')
+                    
+                }
+            }
         }
     }
     getX(){
@@ -63,6 +82,18 @@ class player{
     }
     getY(){
         return this.y;
+    }
+    getSteps(){
+        return this.steps;
+    }
+    resetSteps(){
+        this.steps = [];
+    }
+    teleport(x,y){
+        this.x = x;
+        this.y = y;
+        this.dx = x*64;
+        this.dy = y*64;
     }
 }
 export default player;
