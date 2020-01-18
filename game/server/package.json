@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "App.js",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.0",
+    "mysql": "^2.17.1",
+    "node-fetch": "^2.6.0",
+    "websocket": "^1.0.31"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
