@@ -44,6 +44,7 @@ module.exports = class Response{
     }
     sendPackage(data, clients, map){
         const client = clients[data.id]
+        if (client.lastPackage == undefined){client.lastPackage = 10}
         if(data.steps != undefined){
             if(Date.now()-client.lastPackage < 800 || data.steps.length > 2){
                 this.playerObject.lastPackage = Date.now();
