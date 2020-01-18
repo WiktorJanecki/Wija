@@ -35,7 +35,6 @@ It need's **4** node consoles
 
 ## TO-DO
 
-* [ ] REFACTORING!!!! - game/server and less game/client
 * [ ] Get all clients in client map and render them
 
 
