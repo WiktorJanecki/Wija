@@ -54,6 +54,17 @@ module.exports = class Response{
                 this.setPlayerObject(client, map);
                 this.playerObject.x = cords[0]
                 this.playerObject.y = cords[1]
+                let arr = [];
+                for(let player in clients){
+                    if(clients[player].map == client.map){
+                        arr.push({
+                            x:clients[player].x,
+                            y:clients[player].y,
+                            nickname:clients[player].nickname,
+                        })
+                    }
+                }
+                this.playerObject.players = arr;
                 this.playerObject.lastPackage = Date.now();
                 this.connection.sendUTF(JSON.stringify(this.playerObject))
                 this.setClientObject(clients, data);
@@ -61,6 +72,17 @@ module.exports = class Response{
         }
         else{
             this.setPlayerObject(client, map)
+            let arr = [];
+            for(let player in clients){
+                if(clients[player].map == client.map){
+                    arr.push({
+                        x:clients[player].x,
+                        y:clients[player].y,
+                        nickname:clients[player].nickname,
+                    })
+                }
+            }
+            this.playerObject.players = arr;
             this.connection.sendUTF(JSON.stringify(this.playerObject))
             this.setClientObject(clients, data);
         }   

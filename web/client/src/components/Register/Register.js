@@ -117,7 +117,6 @@ class Register extends React.Component{
                 body:'{"login":"'+login.value+'","password":"'+pass.value+'","repeat":"'+repeat.value+'","terms":"'+radio.checked+'","email":"'+email.value+'"}',
             }).then((res)=>{
                 if(res.status!==200){
-                    console.log(res.status);
                 }else{
                     return res.json();
                 }

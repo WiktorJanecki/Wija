@@ -18,7 +18,9 @@ class game{
         this.canvas = generatedCanvas.canvas;
         this.ctx = generatedCanvas.ctx;
         this.ready = false;
-        this.player = new Player(0,0);
+        this.player = new Player(0,0,"",true);
+        this.players = [];
+        this.playersObjects = [];
         this.sendTimer = setInterval(()=>{const func = this.sendPackage.bind(this);func()},1000)
 
     }
@@ -35,21 +37,36 @@ class game{
             this.worldRenderer.render(this.ctx,camera.getCameraX(),camera.getCameraY());
             camera.update(this.player.getX(),this.player.getY(),this.ctx);
             this.player.render(this.ctx);
+            for(let i = 0;i<this.playersObjects.length;i++){
+                this.playersObjects[i].render(this.ctx);
             }
+        }
     }
     onMessage(e){
         this.response = JSON.parse(e);
+        this.players = []
+        for(let player of this.response.players){ // robi arraya z graczami
+            this.players.push(player);
+        }
+        for(let player of this.players){ // usuwa samego siebie
+            if(player.nickname == this.response.nickname){
+                this.players.splice(this.players.indexOf(player),1)
+            }
+        }
+        this.playersObjects = [];
+        for(let player of this.players){
+            this.playersObjects.push(new Player(player.x,player.y,player.nickname, false))
+        }
         if(!this.ready){
             this.worldRenderer= new WorldRenderer(this.response.map)
             this.player.teleport(this.response.x,this.response.y)
-            //camera.move(-30,200); here
+            this.player.nickname = this.response.nickname;
         }
         this.ready = true;
         if(this.player.x!= this.response.x || this.player.y!=this.response.y){
             this.player.x = this.response.x;
             this.player.y = this.response.y;
         }
-        console.log(this.response)
     }
     sendPackage(){
         this.cm.send(JSON.stringify({

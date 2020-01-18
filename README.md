@@ -31,11 +31,14 @@ It need's **4** node consoles
 * Can create character and view its stats
 * Can send client's data, auth it and get database information (e.g. map and cordinates)
 * Can render map
+* Can render all players on same map and write its nicknames
+* Every player can move and it's showing on anothers players screen
 
 
 ## TO-DO
 
-* [ ] Get all clients in client map and render them
+* [ ] Every player smooth moving
+* [ ] Server save to mysql
 
 
 ## Author

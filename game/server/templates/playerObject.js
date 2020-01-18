@@ -5,5 +5,7 @@ module.exports = class playerObject{
         this.y = null;
         this.nickname = null;
         this.map = null;
+        this.lastPackage = null;
+        this.players = null;
     }
 }
