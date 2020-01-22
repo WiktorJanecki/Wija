@@ -3,7 +3,7 @@ import Rectangle from './rectangle'
 class player{
     constructor(x,y,nickname, original){
         this.image = new Image();
-        this.image.src = "../../images/player.png";
+        this.image.src = "../../images/playerSheet.png";
         this.x = x;
         this.y = y;
         this.steps = [];
@@ -11,14 +11,70 @@ class player{
         this.nicknameRect = new Rectangle(0,0,0,0,'black')
         this.dx = this.x*64;
         this.dy = this.y*64;
+        this.sheetX = 0;
+        this.sheetY = 0;
+        this.sheetCooldownL = 0;
+        this.sheetCooldownR = 0;
+        this.sheetCooldownU = 0;
+        this.sheetCooldownB = 0;
         this.cooldown = 0.5;
         setInterval(()=>{this.cooldown-=0.125},100)
-        setInterval(()=>{        
-            if(this.dx/64<this.x){this.dx++;}
-            else if(this.dx/64>this.x){this.dx--;}
-            else if(this.dy/64>this.y){this.dy--;}
-            else if(this.dy/64<this.y){this.dy++;}
-        },5.8125)
+        setInterval(
+            ()=>{        
+                if(this.dx/64<this.x){
+                    this.dx++;
+                    this.sheetY = 2;
+                    this.sheetCooldownR++;
+                    if(this.sheetCooldownR == 16)
+                    {
+                        this.sheetCooldownR = 0;
+                        this.sheetX++;
+                        if(this.sheetX == 4){
+                            this.sheetX = 0;
+                        }
+                    }
+                }
+                else if(this.dx/64>this.x){
+                    this.dx--;
+                    this.sheetY = 3;
+                    this.sheetCooldownL++;
+                    if(this.sheetCooldownL == 16)
+                    {
+                        this.sheetCooldownL = 0;
+                        this.sheetX++;
+                        if(this.sheetX == 4){
+                            this.sheetX = 0;
+                        }
+                    
+                    }
+                }
+                else if(this.dy/64>this.y){
+                    this.dy--;
+                    this.sheetY = 1;
+                    this.sheetCooldownU++;
+                    if(this.sheetCooldownU == 16)
+                    {
+                        this.sheetCooldownU = 0;
+                        this.sheetX++;
+                        if(this.sheetX == 4){
+                            this.sheetX = 0;
+                        }
+                    }
+                }
+                else if(this.dy/64<this.y){
+                    this.dy++;
+                    this.sheetY = 0;
+                    this.sheetCooldownB++;
+                    if(this.sheetCooldownB == 16)
+                    {
+                        this.sheetCooldownB = 0;
+                        this.sheetX++;
+                        if(this.sheetX == 4){
+                            this.sheetX = 0;
+                        }
+                    }
+                }
+            },5.8125)
         if(original){
             window.addEventListener("keydown",(e)=>{
                     if(e.keyCode === 87){//W
@@ -51,7 +107,7 @@ class player{
         }
     }
     render(ctx){
-        ctx.drawImage(this.image,this.dx,this.dy,64,64);
+        ctx.drawImage(this.image,this.sheetX*64,this.sheetY*64,64,64,this.dx,this.dy,64,64);
         ctx.globalAlpha = 0.5;
         this.nicknameRect.resize(ctx.measureText(this.nickname).width+8,30)
         this.nicknameRect.move(this.dx+28-ctx.measureText(this.nickname).width/2,this.dy-36)

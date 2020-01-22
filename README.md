@@ -33,6 +33,7 @@ It need's **4** node consoles
 * Can render map
 * Can render all players on same map and write its nicknames
 * Every player can move and it's showing on anothers players screen
+* Can save all players
 
 
 ## TO-DO
