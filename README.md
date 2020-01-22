@@ -37,10 +37,6 @@ It need's **4** node consoles
 
 ## TO-DO
 
-* [ ] Every player smooth moving
-* [ ] Server save to mysql
-* [ ] CRITICAL ERROR WHEN RELOGING
-
 
 ## Author
 

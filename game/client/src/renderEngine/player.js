@@ -14,10 +14,10 @@ class player{
         this.cooldown = 0.5;
         setInterval(()=>{this.cooldown-=0.125},100)
         setInterval(()=>{        
-            if(this.dx/64<=this.x){this.dx++;}
-            if(this.dx/64>=this.x){this.dx--;}
-            if(this.dy/64>=this.y){this.dy--;}
-            if(this.dy/64<=this.y){this.dy++;}
+            if(this.dx/64<this.x){this.dx++;}
+            else if(this.dx/64>this.x){this.dx--;}
+            else if(this.dy/64>this.y){this.dy--;}
+            else if(this.dy/64<this.y){this.dy++;}
         },5.8125)
         if(original){
             window.addEventListener("keydown",(e)=>{
@@ -60,7 +60,6 @@ class player{
         ctx.font = '20px Arial';
         ctx.fillStyle = 'white'
         ctx.fillText(this.nickname, this.dx+32-ctx.measureText(this.nickname).width/2, this.dy-15)
-
         if(this.w){this.move(0,-1)}
         if(this.s){this.move(0,1)}
         if(this.a){this.move(-1,0)}
@@ -106,8 +105,8 @@ class player{
     teleport(x,y){
         this.x = x;
         this.y = y;
-        this.dx = x*64;
-        this.dy = y*64;
+        //this.dx = x*64;
+        //this.dy = y*64;
     }
 }
 export default player;

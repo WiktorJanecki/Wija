@@ -12,9 +12,10 @@ module.exports = class Authorizator{
         await queryPromise("SELECT * FROM `characters` WHERE `owner-id`=?",[decoder(data.token).id]).then((row) =>{
             dbres = row;
             let x = false;
-            for(let i =0;i<Object.keys(row).length;i++){
-                if(row[i]['id'] == data.id){
+            for(let player of dbres){
+                if(player['id'] == data.id){
                    x=true;
+                   dbres = player;
                 }
             }
             if(x){

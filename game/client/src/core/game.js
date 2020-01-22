@@ -13,8 +13,6 @@ class game{
     constructor(){
         const generatedCanvas = Canvas;
         this.cm  = new ConnectionManager((e)=>{const func = this.onMessage.bind(this, e);func(e)});
-        this.worldRenderer;
-        this.player;
         this.canvas = generatedCanvas.canvas;
         this.ctx = generatedCanvas.ctx;
         this.ready = false;
@@ -44,22 +42,32 @@ class game{
     }
     onMessage(e){
         this.response = JSON.parse(e);
-        this.players = []
-        for(let player of this.response.players){ // robi arraya z graczami
-            this.players.push(player);
-        }
-        for(let player of this.players){ // usuwa samego siebie
-            if(player.nickname == this.response.nickname){
-                this.players.splice(this.players.indexOf(player),1)
+         if(this.response.players.length != this.players.length+1)
+         {
+            this.players = []
+            for(let player of this.response.players){ // robi arraya z graczami
+                this.players.push(player);
             }
-        }
-        this.playersObjects = [];
+            for(let player of this.players){ // usuwa samego siebie
+                if(player.nickname == this.response.nickname){
+                    this.players.splice(this.players.indexOf(player),1)
+                }
+            }
+            this.playersObjects = [];
+            for(let player of this.players){
+                this.playersObjects.push(new Player(player.x,player.y,player.nickname, false))
+            }           
+         }
+        let i = 0;
         for(let player of this.players){
-            this.playersObjects.push(new Player(player.x,player.y,player.nickname, false))
+            this.playersObjects[i].teleport(parseInt(this.response.players.find((element)=>{if(element.nickname == this.playersObjects[i].nickname)return element;}).x),parseInt(this.response.players.find((element)=>{if(element.nickname == this.playersObjects[i].nickname)return element;}).y))
+            i++;
         }
         if(!this.ready){
             this.worldRenderer= new WorldRenderer(this.response.map)
             this.player.teleport(this.response.x,this.response.y)
+            this.player.dx = this.response.x * 64
+            this.player.dy = this.response.y * 64
             this.player.nickname = this.response.nickname;
         }
         this.ready = true;
