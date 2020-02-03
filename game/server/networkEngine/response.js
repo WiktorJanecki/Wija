@@ -1,6 +1,7 @@
 const WorldLoader = require('../worldEngine/worldLoader');
 const PlayerObject = require('../templates/playerObject')
 const worldLoader = new WorldLoader();
+const util = require('util');
 
 module.exports = class Response{
     constructor(connection){
@@ -24,15 +25,39 @@ module.exports = class Response{
             })
         }
     }
-    analyzeSteps(data, client){
+    analyzeSteps(data, client, map){
         if(data.steps !== undefined){
             let x = client.x;
             let y = client.y;
             for(let step of data.steps){
-                if(step == "u"){y--;}
-                else if(step == "d"){y++;}
-                else if(step == "l"){x--;}
-                else if(step == "r"){x++;}
+                if(step == "u"){
+                    if(map[client.map][x][y-1]['collision']){
+                        break;
+                    }else{
+                        y--;
+                    }
+                }
+                else if(step == "d"){
+                    if(map[client.map][x][y+1]['collision']){
+                        break;
+                    }else{
+                        y++;
+                    }
+                }
+                else if(step == "l"){
+                    if(map[client.map][x-1][y]['collision']){
+                        break;
+                    }else{
+                        x--;
+                    }
+                }
+                else if(step == "r"){
+                    if(map[client.map][x+1][y]['collision']){
+                        break;
+                    }else{
+                        x++;
+                    }
+                }
                 else{
                     this.connection.sendUTF(JSON.stringify({success:false,error:"Invalid steps format"}))
                 }
@@ -51,7 +76,7 @@ module.exports = class Response{
                 this.connection.sendUTF(JSON.stringify({success:false,error:"Package send speed is too fast"}))
             }
             else{
-                const cords = this.analyzeSteps(data, client);
+                const cords = this.analyzeSteps(data, client, map);
                 this.setPlayerObject(client, map);
                 this.playerObject.x = cords[0]
                 this.playerObject.y = cords[1]

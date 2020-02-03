@@ -6,7 +6,8 @@ class camera{
         this.y = 0;
         this.cameraX = 0;
         this.cameraY = 0;
-        this.speed = 2.4;
+        this.speed = 99;
+        setTimeout(()=>{this.speed = 2.4},1000)
         this.bg = new Rectangle(-2,-2,30000,30000,"black");
     }
     prepare(ctx){
@@ -51,10 +52,9 @@ class camera{
     }
     resetCamera(){
         this.cameraX = 0
-        this.cameraY = 0
-    }
-    teleport(ctx,x,y){
-        ctx.translate(x,y);
+        this.cameraY = 0;
+        this.speed = 99;
+        setTimeout(()=>{this.speed = 2.4},400)
     }
 }
 export default camera;

@@ -11,7 +11,7 @@ class worldRenderer{
         for(let i = 0; i< this.world[0].length;i++){this.tiles[i]= new Array(this.world[0].lenght)}
         for(let i = 0;i <this.world.length;i++){
             for(let j = 0;j <this.world[0].length;j++){
-                this.tiles[i][j] = new Tile(i,j,bid.getPath(parseInt(this.world[i][j])));
+                this.tiles[i][j] = new Tile(i,j,bid.getPath(parseInt(this.world[i][j].id)));
             }
          }
     }

@@ -1,4 +1,6 @@
 var fs = require('fs')
+var BlocksID = require('./blocksID')
+var bid = new BlocksID
 
 module.exports = class WorldLoader{
     load(map){
@@ -46,7 +48,7 @@ module.exports = class WorldLoader{
                             if (lines[i][j] != ';'){
                                 string = string+lines[i][j];
                             }else{
-                                tiles[i-1][jindex] = string;
+                                tiles[i-1][jindex] = bid.getObject(parseInt(string));
                                 jindex++;
                                 string = "";
                             }

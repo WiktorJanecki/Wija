@@ -34,9 +34,13 @@ It need's **4** node consoles
 * Can render all players on same map and write its nicknames
 * Every player can move and it's showing on anothers players screen
 * Can save all players
+* Can animate every of players
 
 
 ## TO-DO
+
+* [1/2] Collision system
+* [x] Block data system
 
 
 ## Author

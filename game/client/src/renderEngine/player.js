@@ -1,4 +1,5 @@
 import Rectangle from './rectangle'
+import Nickname from './nickname';
 
 class player{
     constructor(x,y,nickname, original){
@@ -7,8 +8,8 @@ class player{
         this.x = x;
         this.y = y;
         this.steps = [];
+        this.nicknameRect = new Nickname();
         this.nickname = nickname;
-        this.nicknameRect = new Rectangle(0,0,0,0,'black')
         this.dx = this.x*64;
         this.dy = this.y*64;
         this.sheetX = 0;
@@ -18,7 +19,7 @@ class player{
         this.sheetCooldownU = 0;
         this.sheetCooldownB = 0;
         this.cooldown = 0.5;
-        setInterval(()=>{this.cooldown-=0.125},100)
+        setInterval(()=>{this.cooldown-=0.125;},100)
         setInterval(
             ()=>{        
                 if(this.dx/64<this.x){
@@ -108,18 +109,15 @@ class player{
     }
     render(ctx){
         ctx.drawImage(this.image,this.sheetX*64,this.sheetY*64,64,64,this.dx,this.dy,64,64);
-        ctx.globalAlpha = 0.5;
-        this.nicknameRect.resize(ctx.measureText(this.nickname).width+8,30)
-        this.nicknameRect.move(this.dx+28-ctx.measureText(this.nickname).width/2,this.dy-36)
-        this.nicknameRect.render(ctx)
-        ctx.globalAlpha = 1.0;
-        ctx.font = '20px Arial';
-        ctx.fillStyle = 'white'
-        ctx.fillText(this.nickname, this.dx+32-ctx.measureText(this.nickname).width/2, this.dy-15)
+        this.nicknameRect.render(ctx,this.dx,this.dy,this.nickname);
         if(this.w){this.move(0,-1)}
         if(this.s){this.move(0,1)}
         if(this.a){this.move(-1,0)}
         if(this.d){this.move(1,0)}
+        if(!this.w&&!this.s&&!this.a&&!this.d){
+            this.sheetX = 0;
+            this.sheetY = 0;
+        }
     }
     move(x,y){
         if(this.cooldown<0){
@@ -161,8 +159,6 @@ class player{
     teleport(x,y){
         this.x = x;
         this.y = y;
-        //this.dx = x*64;
-        //this.dy = y*64;
     }
 }
 export default player;

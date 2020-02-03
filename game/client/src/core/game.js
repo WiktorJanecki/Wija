@@ -54,16 +54,16 @@ class game{
                 }
             }
             this.playersObjects = [];
-            for(let player of this.players){
+            for(let player of this.players){//robi obiekty z graczami
                 this.playersObjects.push(new Player(player.x,player.y,player.nickname, false))
             }           
          }
         let i = 0;
-        for(let player of this.players){
+        for(let player of this.players){ //tepa wszystkich graczy do ich pozycji
             this.playersObjects[i].teleport(parseInt(this.response.players.find((element)=>{if(element.nickname == this.playersObjects[i].nickname)return element;}).x),parseInt(this.response.players.find((element)=>{if(element.nickname == this.playersObjects[i].nickname)return element;}).y))
             i++;
         }
-        if(!this.ready){
+        if(!this.ready){ //inicjalizuje świat
             this.worldRenderer= new WorldRenderer(this.response.map)
             this.player.teleport(this.response.x,this.response.y)
             this.player.dx = this.response.x * 64
@@ -71,7 +71,7 @@ class game{
             this.player.nickname = this.response.nickname;
         }
         this.ready = true;
-        if(this.player.x!= this.response.x || this.player.y!=this.response.y){
+        if(this.player.x!= this.response.x || this.player.y!=this.response.y){ //tepa gracza jezeli hackował
             this.player.x = this.response.x;
             this.player.y = this.response.y;
         }
