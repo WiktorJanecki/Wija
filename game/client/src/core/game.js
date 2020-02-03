@@ -32,11 +32,15 @@ class game{
     update(){
         camera.prepare(this.ctx); 
         if(this.ready){
-            this.worldRenderer.render(this.ctx,camera.getCameraX(),camera.getCameraY());
             camera.update(this.player.getX(),this.player.getY(),this.ctx);
-            this.player.render(this.ctx);
-            for(let i = 0;i<this.playersObjects.length;i++){
-                this.playersObjects[i].render(this.ctx);
+            for(let i = 0;i <= 10;i++){
+                if(this.worldRenderer.layer == i){this.worldRenderer.render(this.ctx,camera.getCameraX(),camera.getCameraY());}
+                if(this.player.layer == i){this.player.render(this.ctx);}
+                if(this.player.nicknameRect.layer == i){this.player.nicknameRect.render(this.ctx,this.player.dx,this.player.dy,this.player.nickname);}
+                for(let j = 0;j<this.playersObjects.length;j++){
+                    if(this.playersObjects[j].layer == i){this.playersObjects[j].render(this.ctx);}
+                    if(this.playersObjects[j].nicknameRect.layer == i){this.playersObjects[j].nicknameRect.render(this.ctx,this.playersObjects[j].dx,this.playersObjects[j].dy,this.playersObjects[j].nickname);}
+                }
             }
         }
     }
@@ -69,6 +73,7 @@ class game{
             this.player.dx = this.response.x * 64
             this.player.dy = this.response.y * 64
             this.player.nickname = this.response.nickname;
+            this.player.tiles = this.worldRenderer.tiles;
         }
         this.ready = true;
         if(this.player.x!= this.response.x || this.player.y!=this.response.y){ //tepa gracza jezeli hackował

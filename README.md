@@ -39,8 +39,7 @@ It need's **4** node consoles
 
 ## TO-DO
 
-* [1/2] Collision system
-* [x] Block data system
+* [ ] GUI
 
 
 ## Author

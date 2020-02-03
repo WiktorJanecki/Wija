@@ -1,7 +1,10 @@
 import Rectangle from "./rectangle";
+import DrawableObject from './drawableObject';
 
-class Nickname{
+class Nickname extends DrawableObject{
     constructor(){
+        super();
+        this.layer = 10;
         this.nicknameRect = new Rectangle(0,0,0,0,"black");
     }
     render(ctx,playerX,playerY,nickname){

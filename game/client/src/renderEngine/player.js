@@ -1,12 +1,16 @@
 import Rectangle from './rectangle'
 import Nickname from './nickname';
+import DrawableObject from './drawableObject'
 
-class player{
+class player extends DrawableObject{
     constructor(x,y,nickname, original){
+        super();
+        this.layer = 8;
         this.image = new Image();
         this.image.src = "../../images/playerSheet.png";
         this.x = x;
         this.y = y;
+        this.tiles;
         this.steps = [];
         this.nicknameRect = new Nickname();
         this.nickname = nickname;
@@ -21,7 +25,7 @@ class player{
         this.cooldown = 0.5;
         setInterval(()=>{this.cooldown-=0.125;},100)
         setInterval(
-            ()=>{        
+            ()=>{   
                 if(this.dx/64<this.x){
                     this.dx++;
                     this.sheetY = 2;
@@ -109,7 +113,6 @@ class player{
     }
     render(ctx){
         ctx.drawImage(this.image,this.sheetX*64,this.sheetY*64,64,64,this.dx,this.dy,64,64);
-        this.nicknameRect.render(ctx,this.dx,this.dy,this.nickname);
         if(this.w){this.move(0,-1)}
         if(this.s){this.move(0,1)}
         if(this.a){this.move(-1,0)}
@@ -121,25 +124,27 @@ class player{
     }
     move(x,y){
         if(this.cooldown<0){
-            this.x+=x;
-            this.y+=y;
-            this.cooldown = 0.5;
-            if(y == 0){
-                if(x>0){
-                    this.steps.push('r')
-                    
-                }else{
-                    this.steps.push('l')
-                    
+            if(this.y+y<this.tiles.length && this.x+x<this.tiles[0].length && this.x+x >=0 && this.y+y >=0 && !this.tiles[this.x+x][this.y].collision && !this.tiles[this.x][this.y+y].collision){
+                this.x+=x;
+                this.y+=y;          
+                this.cooldown = 0.5;
+                if(y == 0){
+                    if(x>0){
+                        this.steps.push('r')
+                        
+                    }else{
+                        this.steps.push('l')
+                        
+                    }
                 }
-            }
-            else{
-                if(y>0){
-                    this.steps.push('d')
-                    
-                }else{
-                    this.steps.push('u')
-                    
+                else{
+                    if(y>0){
+                        this.steps.push('d')
+                        
+                    }else{
+                        this.steps.push('u')
+                        
+                    }
                 }
             }
         }
